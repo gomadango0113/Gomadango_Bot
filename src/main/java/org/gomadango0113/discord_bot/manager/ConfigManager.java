@@ -1,22 +1,54 @@
 package org.gomadango0113.discord_bot.manager;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.gomadango0113.discord_bot.Main;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConfigManager {
 
+    private static final JDA jda;
+    private static final Gson gson;
+
+    static {
+        jda = Main.getJda();
+        gson = new GsonBuilder().setPrettyPrinting().create();
+    }
+
+    public static String getJoinLeaveMessageChannelId(String guildid) throws IOException {
+        JsonObject json = getJson();
+        if (json.has("guild_setting")) {
+            JsonObject guild_settings = json.getAsJsonObject("guild_setting");
+            if (guild_settings.has(guildid)) {
+                JsonObject guild_obj = guild_settings.getAsJsonObject(guildid);
+                if (guild_obj.has("join-leave_channel")) {
+                    return guild_obj.get("join-leave_channel").getAsString();
+                }
+            }
+        }
+
+        return null;
+    }
+
     public static String getToken() throws IOException {
         return getJson().getAsJsonObject("bot_setting").get("token").getAsString();
+    }
+
+    public static void writeFile(String date) {
+        try (BufferedWriter write = new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(getFile().toPath()), StandardCharsets.UTF_8))) {
+            write.write(date);
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static JsonObject getJson() throws IOException {
@@ -31,7 +63,7 @@ public class ConfigManager {
                 throw new RuntimeException(e);
             }
 
-            return new JsonParser().parse(file_read.toString()).getAsJsonObject();
+            return gson.fromJson(file_read.toString(), JsonObject.class);
         }
         else {
             throw new NullPointerException("ファイルが存在しません");

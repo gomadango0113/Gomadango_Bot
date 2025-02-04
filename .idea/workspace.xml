@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2917dcc8-ef45-4005-a69e-f3359a399e76" name="変更" comment="Botの基本を作成">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/gomadango0113/discord_bot/listener/GuildJoinLeaveListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/gomadango0113/discord_bot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gomadango0113/discord_bot/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/gomadango0113/discord_bot/manager/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/gomadango0113/discord_bot/manager/ConfigManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +88,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738669020467</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Botの基本を作成">
+      <option name="closed" value="true" />
+      <created>1738669662070</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1738669662070</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
