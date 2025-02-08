@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.gomadango0113.discord_bot.command.MusicCommand;
 import org.gomadango0113.discord_bot.listener.GuildJoinLeaveListener;
 import org.gomadango0113.discord_bot.manager.ConfigManager;
 
@@ -27,10 +28,15 @@ public class Main extends ListenerAdapter implements EventListener {
             jda = JDABuilder.createDefault(ConfigManager.getToken())
                     .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT)
                     .addEventListeners(new Main())
+                    .addEventListeners(new MusicCommand())
                     .addEventListeners(new GuildJoinLeaveListener())
                     .build();
 
             jda.updateCommands()
+                    .addCommands(Commands.slash("play", "音楽を再生するコマンド")
+                            .addOption(OptionType.STRING, "url", "再生したい音楽のURL（もしくはキーワード）"))
+                    .addCommands(Commands.slash("skip", "現在再生している音楽をスキップ"))
+                    .addCommands(Commands.slash("play-info", "現在再生している音楽"))
                     .queue();
 
             jda.awaitReady();
